@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ashenda Tigray Poll</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900;700;600&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold-main: #ffd700;
+      --gold-dark: #bfa100;
+      --gold-light: #fff8dc;
+      --award-bg: #f9f6ef;
+      --award-card: #fffbe6;
+      --award-shadow: rgba(191,161,0,0.10);
+      --award-gradient: linear-gradient(135deg, #ffe066 0%, #ffd700 60%, #fffbe6 100%);
+      --award-gradient-btn: linear-gradient(90deg, #ffd700 0%, #fffbe6 100%);
+      --award-border: #ffe066;
+      --award-text: #111;
+      --award-title: #111;
+      --award-accent: #fffbe6;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Nunito', Arial, sans-serif;
+      background: var(--award-bg);
+      color: var(--award-text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: var(--award-gradient);
+      color: var(--award-title);
+      padding: 1.5rem 1rem 1.2rem 1rem;
+      text-align: center;
+      box-shadow: 0 2px 12px var(--award-shadow);
+      border-bottom: 2px solid var(--gold-main);
+    }
+    header h1 {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      font-weight: 900;
+      text-shadow: 0 2px 8px var(--award-shadow);
+      color: var(--award-title);
+      margin-bottom: 0.1em;
+    }
+    .hero {
+      background: var(--award-card);
+      padding: 2.2rem 1rem 1.5rem 1rem;
+      text-align: center;
+      border-bottom: 2px solid var(--gold-main);
+    }
+    .hero h2 {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 1.8rem;
+      color: var(--award-title);
+      margin-bottom: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .hero p {
+      color: var(--award-text);
+      font-size: 1.15rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
+      font-family: 'Nunito', Arial, sans-serif;
+    }
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .search-bar input {
+      width: 100%;
+      max-width: 420px;
+      padding: 0.9rem 1.2rem;
+      border: 2px solid var(--gold-main);
+      border-radius: 32px;
+      font-size: 1.1rem;
+      outline: none;
+      background: var(--award-accent);
+      transition: border 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px var(--award-shadow);
+      color: var(--award-title);
+      font-family: 'Nunito', Arial, sans-serif;
+      font-weight: 600;
+    }
+    .search-bar input:focus {
+      border: 2.5px solid var(--gold-dark);
+      box-shadow: 0 4px 16px var(--award-shadow);
+    }
+    .categories, .nominees {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.2rem;
+      padding: 1.2rem 0.5rem 2.5rem 0.5rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .category, .nominee {
+      background: var(--award-card);
+      border-radius: 22px;
+      box-shadow: 0 4px 24px var(--award-shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.2rem 1rem 1.5rem 1rem;
+      transition: box-shadow 0.2s, transform 0.15s;
+      cursor: pointer;
+      position: relative;
+      border: 2.5px solid var(--gold-main);
+    }
+    .category:hover, .nominee:hover {
+      box-shadow: 0 8px 32px var(--award-shadow);
+      transform: translateY(-2px) scale(1.025);
+      border-color: var(--gold-dark);
+    }
+    .category-img, .nominee-img {
+      width: 100%;
+      max-width: 320px;
+      height: 200px;
+      border-radius: 18px;
+      object-fit: cover;
+      border: 3px solid var(--gold-main);
+      background: var(--award-accent);
+      margin-bottom: 1.1rem;
+      box-shadow: 0 2px 12px var(--award-shadow);
+      transition: border 0.2s;
+    }
+    .category-info, .nominee-info {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .category-title {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--award-title);
+      text-align: center;
+      margin-bottom: 0.2rem;
+      letter-spacing: 0.5px;
+    }
+    .nominee-title {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: var(--award-title);
+      text-align: center;
+      margin-bottom: 0.1rem;
+      letter-spacing: 0.5px;
+    }
+    .nominee-place {
+      font-size: 1.05rem;
+      color: var(--award-title);
+      font-weight: 600;
+      text-align: center;
+      font-family: 'Nunito', Arial, sans-serif;
+    }
+    .nominee-vote {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-top: 0.7rem;
+      justify-content: center;
+    }
+    .vote-btn {
+      background: var(--award-gradient-btn);
+      color: var(--award-title);
+      border: none;
+      border-radius: 22px;
+      padding: 0.55rem 1.5rem;
+      font-size: 1.08rem;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s, color 0.2s;
+      outline: none;
+      box-shadow: 0 2px 8px var(--award-shadow);
+      border: 2px solid var(--gold-main);
+      letter-spacing: 0.5px;
+    }
+    .vote-btn:active {
+      transform: scale(0.97);
+      background: linear-gradient(135deg, #fffbe6 0%, #ffd700 100%);
+      color: var(--gold-dark);
+    }
+    .votes-count {
+      font-size: 1.15rem;
+      color: var(--award-title);
+      font-weight: 800;
+      min-width: 36px;
+      text-align: center;
+      background: var(--award-accent);
+      border-radius: 12px;
+      padding: 0.2rem 0.7rem;
+      border: 1.5px solid var(--gold-main);
+      margin-left: 0.2rem;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .back-btn {
+      background: none;
+      border: none;
+      color: var(--award-title);
+      font-size: 1.1rem;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: color 0.2s;
+    }
+    .back-btn:hover {
+      text-decoration: underline;
+      color: var(--gold-dark);
+    }
+    footer {
+      background: var(--award-gradient);
+      color: var(--award-title);
+      text-align: center;
+      padding: 1.5rem 1rem 1.2rem 1rem;
+      margin-top: auto;
+      font-size: 1.08rem;
+      letter-spacing: 1px;
+      border-top: 2px solid var(--gold-main);
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 700;
+      box-shadow: 0 -2px 12px var(--award-shadow);
+    }
+    @media (min-width: 600px) {
+      .categories, .nominees {
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+        justify-content: center;
+      }
+      .category, .nominee {
+        width: 320px;
+        min-height: 340px;
+      }
+      .category-img, .nominee-img {
+        height: 220px;
+        max-width: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ashenda Tigray Poll</h1>
+  </header>
+  <section class="hero">
+    <h2>Welcome to Ashenda Tigray</h2>
+    <p>Vote for your favorite Ashenda nominees and celebrate culture, beauty, and tradition.</p>
+  </section>
+  <main>
+    <!-- Home Page -->
+    <section id="home-page">
+      <div class="search-bar">
+        <input type="text" id="homeSearchInput" placeholder="Search nominees..." />
+      </div>
+      <div class="categories" id="categories-list">
+        <!-- Categories rendered by JS -->
+      </div>
+      <div class="nominees" id="home-nominee-search-results" style="display:none;"></div>
+    </section>
+    <!-- Category Page -->
+    <section id="category-page" style="display:none;">
+      <button class="back-btn" id="backToHomeBtn">&#8592; Back to Categories</button>
+      <div class="search-bar">
+        <input type="text" id="categorySearchInput" placeholder="Search nominees in this category..." />
+      </div>
+      <h2 id="category-title" style="text-align:center;margin-bottom:1.2rem;color:var(--award-title);"></h2>
+      <div class="nominees" id="category-nominees-list">
+        <!-- Nominees rendered by JS -->
+      </div>
+    </section>
+  </main>
+  <footer>
+    &copy; 2017 Ashenda Tigray. Made with <span style="color: var(--gold-main);">&#10084;</span> for culture.
+  </footer>
+  <script>
+    // Data
+    const categories = [
+      {
+        id: 1,
+        name: "Best Ashenda girls",
+        img: "ashenda.webp",
+        nominees: [
+          {
+            id: 101,
+            title: "Selam Berhe",
+            place: "Mekelle",
+            img: "a2.webp",
+            votes: 0
+          },
+          {
+            id: 102,
+            title: "Ruth Gebre",
+            place: "Adigrat",
+            img: "a3.webp",
+            votes: 0
+          }
+        ]
+      },
+      {
+        id: 2,
+        name: "Best Ashenda Song",
+        img: "art.webp",
+        nominees: [
+          {
+            id: 201,
+            title: "Mulu Tigray",
+            place: "Axum",
+            img: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=400&q=80",
+            votes: 0
+          },
+          {
+            id: 202,
+            title: "Saba Tesfay",
+            place: "Shire",
+            img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
+            votes: 0
+          }
+        ]
+      },
+      {
+        id: 3,
+        name: "Best Ashenda Artist",
+        img: "a2.webp",
+        nominees: [
+          {
+            id: 301,
+            title: "samri alem",
+            place: "Axum",
+            img: "q1.jpeg",
+            votes: 0
+          },
+          {
+            id: 302,
+            title: "samri alem",
+            place: "Mekelle",
+            img: "q2.jpeg",
+            votes: 0
+          }
+        ]
+      },
+      {
+        id: 4,
+        name: "Best Ashenda art",
+        img: "q4.jpeg",
+        nominees: [
+          {
+            id: 401,
+            title: "samri alem",
+            place: "Shire",
+            img: "q3.jpeg",
+            votes: 0
+          },
+          {
+            id: 402,
+            title: "hana tuem",
+            place: "Adwa",
+            img: "q1.jpeg",
+            votes: 0
+          }
+        ]
+      }
+    ];
+
+    // State
+    let currentCategoryId = null;
+
+    // Render Home Page
+    function renderCategories() {
+      const container = document.getElementById('categories-list');
+      container.innerHTML = '';
+      categories.forEach(cat => {
+        const catDiv = document.createElement('div');
+        catDiv.className = 'category';
+        catDiv.onclick = () => openCategory(cat.id);
+        catDiv.innerHTML = `
+          <img class="category-img" src="${cat.img}" alt="${cat.name}" />
+          <div class="category-info">
+            <div class="category-title">${cat.name}</div>
+          </div>
+        `;
+        container.appendChild(catDiv);
+      });
+    }
+
+    // Render Nominees for Home Search
+    function renderHomeNomineeSearchResults(results) {
+      const container = document.getElementById('home-nominee-search-results');
+      container.innerHTML = '';
+      if (results.length === 0) {
+        container.innerHTML = '<p style="width:100%;text-align:center;color:var(--award-title);font-weight:700;">No nominees found.</p>';
+        return;
+      }
+      results.forEach(nom => {
+        const nomDiv = document.createElement('div');
+        nomDiv.className = 'nominee';
+        nomDiv.innerHTML = `
+          <img class="nominee-img" src="${nom.img}" alt="${nom.title}" />
+          <div class="nominee-info">
+            <div class="nominee-title">${nom.title}</div>
+            <div class="nominee-place">${nom.place} <span style='color:var(--gold-main);font-size:0.95em;'>(${nom.categoryName})</span></div>
+            <div class="nominee-vote">
+              <button class="vote-btn" onclick="voteNominee(${nom.categoryId},${nom.id},true)">Vote</button>
+              <span class="votes-count" id="votes-home-${nom.categoryId}-${nom.id}">${nom.votes}</span>
+            </div>
+          </div>
+        `;
+        container.appendChild(nomDiv);
+      });
+    }
+
+    // Render Category Page
+    function renderCategoryPage(catId) {
+      const cat = categories.find(c => c.id === catId);
+      if (!cat) return;
+      document.getElementById('category-title').textContent = cat.name;
+      renderCategoryNominees(cat.nominees);
+    }
+
+    function renderCategoryNominees(nominees) {
+      const container = document.getElementById('category-nominees-list');
+      container.innerHTML = '';
+      if (nominees.length === 0) {
+        container.innerHTML = '<p style="width:100%;text-align:center;color:var(--award-title);font-weight:700;">No nominees found in this category.</p>';
+        return;
+      }
+      nominees.forEach(nom => {
+        const nomDiv = document.createElement('div');
+        nomDiv.className = 'nominee';
+        nomDiv.innerHTML = `
+          <img class="nominee-img" src="${nom.img}" alt="${nom.title}" />
+          <div class="nominee-info">
+            <div class="nominee-title">${nom.title}</div>
+            <div class="nominee-place">${nom.place}</div>
+            <div class="nominee-vote">
+              <button class="vote-btn" onclick="voteNominee(${currentCategoryId},${nom.id},false)">Vote</button>
+              <span class="votes-count" id="votes-cat-${currentCategoryId}-${nom.id}">${nom.votes}</span>
+            </div>
+          </div>
+        `;
+        container.appendChild(nomDiv);
+      });
+    }
+
+    // Navigation
+    function openCategory(catId) {
+      currentCategoryId = catId;
+      document.getElementById('home-page').style.display = 'none';
+      document.getElementById('category-page').style.display = '';
+      document.getElementById('categorySearchInput').value = '';
+      renderCategoryPage(catId);
+    }
+    document.getElementById('backToHomeBtn').onclick = function() {
+      document.getElementById('home-page').style.display = '';
+      document.getElementById('category-page').style.display = 'none';
+      currentCategoryId = null;
+    };
+
+    // Voting
+    function voteNominee(catId, nomineeId, isHome) {
+      const cat = categories.find(c => c.id === catId);
+      if (!cat) return;
+      const nom = cat.nominees.find(n => n.id === nomineeId);
+      if (!nom) return;
+      nom.votes++;
+      if (isHome) {
+        document.getElementById(`votes-home-${catId}-${nomineeId}`).textContent = nom.votes;
+      } else {
+        document.getElementById(`votes-cat-${catId}-${nomineeId}`).textContent = nom.votes;
+      }
+    }
+    window.voteNominee = voteNominee;
+
+    // Home Search
+    document.getElementById('homeSearchInput').addEventListener('input', function(e) {
+      const val = e.target.value.trim().toLowerCase();
+      const results = [];
+      if (val.length > 0) {
+        categories.forEach(cat => {
+          cat.nominees.forEach(nom => {
+            if (
+              nom.title.toLowerCase().includes(val) ||
+              nom.place.toLowerCase().includes(val)
+            ) {
+              results.push({
+                ...nom,
+                categoryName: cat.name,
+                categoryId: cat.id
+              });
+            }
+          });
+        });
+        document.getElementById('categories-list').style.display = 'none';
+        document.getElementById('home-nominee-search-results').style.display = '';
+        renderHomeNomineeSearchResults(results);
+      } else {
+        document.getElementById('categories-list').style.display = '';
+        document.getElementById('home-nominee-search-results').style.display = 'none';
+      }
+    });
+
+    // Category Search
+    document.getElementById('categorySearchInput').addEventListener('input', function(e) {
+      const val = e.target.value.trim().toLowerCase();
+      const cat = categories.find(c => c.id === currentCategoryId);
+      if (!cat) return;
+      let filtered = cat.nominees;
+      if (val.length > 0) {
+        filtered = cat.nominees.filter(nom =>
+          nom.title.toLowerCase().includes(val) ||
+          nom.place.toLowerCase().includes(val)
+        );
+      }
+      renderCategoryNominees(filtered);
+    });
+
+    // Initial render
+    renderCategories();
+  </script>
+</body>
+</html> 
